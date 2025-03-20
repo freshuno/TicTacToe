@@ -17,7 +17,12 @@ namespace TicTacToe
         int playerOWins;
         bool newGame;
         Player currentPlayer;
-
+        private readonly int[,] winPatterns = new int[,]
+        {
+         { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, // Wiersze
+         { 0, 3, 6 }, { 1, 4, 7 }, { 2, 5, 8 }, // Kolumny
+         { 0, 4, 8 }, { 2, 4, 6 }               // Przek¹tne
+         };
         private void RestartGame()
         {
             numberOfClicks = 0;
@@ -72,39 +77,18 @@ namespace TicTacToe
         }
         private void checkWin()
         {
-            if (buttons[0].Text == buttons[1].Text && buttons[1].Text == buttons[2].Text && buttons[0].Text != "")
+            foreach (var i in Enumerable.Range(0, winPatterns.GetLength(0)))
             {
-                Victory();
+                if (buttons[winPatterns[i, 0]].Text == buttons[winPatterns[i, 1]].Text &&
+                    buttons[winPatterns[i, 1]].Text == buttons[winPatterns[i, 2]].Text &&
+                    buttons[winPatterns[i, 0]].Text != "")
+                {
+                    Victory();
+                    return;
+                }
             }
-            else if (buttons[3].Text == buttons[4].Text && buttons[4].Text == buttons[5].Text && buttons[3].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[6].Text == buttons[7].Text && buttons[7].Text == buttons[8].Text && buttons[6].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[0].Text == buttons[3].Text && buttons[3].Text == buttons[6].Text && buttons[0].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[1].Text == buttons[4].Text && buttons[4].Text == buttons[7].Text && buttons[1].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[2].Text == buttons[5].Text && buttons[5].Text == buttons[8].Text && buttons[2].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[0].Text == buttons[4].Text && buttons[4].Text == buttons[8].Text && buttons[0].Text != "")
-            {
-                Victory();
-            }
-            else if (buttons[2].Text == buttons[4].Text && buttons[4].Text == buttons[6].Text && buttons[2].Text != "")
-            {
-                Victory();
-            }
-            else if (numberOfClicks == 9)
+
+            if (numberOfClicks == 9)
             {
                 MessageBox.Show("It's a draw!");
                 RestartGame();
