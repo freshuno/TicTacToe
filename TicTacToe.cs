@@ -1,8 +1,8 @@
 namespace TicTacToe
 {
-    public partial class Form1 : Form
+    public partial class TicTacToe : Form
     {
-        public Form1()
+        public TicTacToe()
         {
             InitializeComponent();
             RestartGame();
@@ -19,9 +19,9 @@ namespace TicTacToe
         Player currentPlayer;
         private readonly int[,] winPatterns = new int[,]
         {
-         { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, // Wiersze
-         { 0, 3, 6 }, { 1, 4, 7 }, { 2, 5, 8 }, // Kolumny
-         { 0, 4, 8 }, { 2, 4, 6 }               // Przek¹tne
+         { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, 
+         { 0, 3, 6 }, { 1, 4, 7 }, { 2, 5, 8 }, 
+         { 0, 4, 8 }, { 2, 4, 6 }              
          };
         private void RestartGame()
         {
@@ -91,6 +91,7 @@ namespace TicTacToe
             if (numberOfClicks == 9)
             {
                 MessageBox.Show("It's a draw!");
+                newGame = false;
                 RestartGame();
             }
         }

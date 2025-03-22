@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe
 {
-    partial class Form1
+    partial class TicTacToe
     {
         /// <summary>
         ///  Required designer variable.
@@ -165,8 +165,8 @@
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "TicTacToe";
+            Text = "TicTacToe";
             ResumeLayout(false);
             PerformLayout();
         }
