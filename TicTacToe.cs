@@ -2,10 +2,15 @@ namespace TicTacToe
 {
     public partial class TicTacToe : Form
     {
-        public TicTacToe()
+        public TicTacToe(bool Mode)
         {
             InitializeComponent();
             RestartGame();
+            botMode = Mode;
+            if (!botMode)
+            {
+                label3.Visible = true;
+            }
         }
         public enum Player
         {
@@ -15,6 +20,7 @@ namespace TicTacToe
         int numberOfClicks;
         int playerXWins;
         int playerOWins;
+        bool botMode;
         bool newGame;
         Player currentPlayer;
         private readonly int[,] winPatterns = new int[,]
@@ -27,6 +33,7 @@ namespace TicTacToe
         {
             numberOfClicks = 0;
             currentPlayer = Player.X;
+            label3.Text = $"Current player: {currentPlayer}";
             buttons = new List<Button> { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
             foreach (Button button in buttons)
             {
@@ -49,10 +56,11 @@ namespace TicTacToe
             {
                 currentPlayer = Player.X;
             }
+            label3.Text = $"Current player: {currentPlayer}";
             button.Enabled = false;
             numberOfClicks++;
             checkWin();
-            if (newGame)
+            if (newGame && botMode)
             {
                 botMove();
             }
